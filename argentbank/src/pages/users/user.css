@@ -52,14 +52,22 @@ h1 {
   }
   
   .edit-button {
+    position: relative;
+    left: 47%;
+    margin-top: 20px;
     border-color: #00bc77;
     background-color: #00bc77;
     color: #fff;
     font-weight: bold;
     padding: 10px;
+    width: 100px;
+
   }
   
   .header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     color: #fff;
     margin-bottom: 2rem;
   }
@@ -75,7 +83,29 @@ h1 {
     background-color: #00bc77;
     color: #fff;
   }
-  
+  .buttons-form {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+
+  }
+  .buttons-form button {
+    width: 110px;
+    height: 40px;
+    color: white;
+    background-color: #00bc77;
+  }
+  .inpt-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px;
+  }
+  .inpt-form input {
+    height: 25px;
+  }
   @media (min-width: 720px) {
     .account {
       flex-direction: row;

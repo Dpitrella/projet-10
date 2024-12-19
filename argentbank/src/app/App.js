@@ -1,12 +1,15 @@
 
+
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './pages/home/home.jsx'
-import Signin from './pages/signin/signin.jsx'
-import User from './pages/users/user.jsx'
+import Home from '../pages/home/home.jsx'
+import Signin from '../pages/signin/signin.jsx'
+import User from '../pages/users/user.jsx'
+
 function App() {
   return (
+
     <div className="App">
 
       <Routes>
@@ -16,6 +19,8 @@ function App() {
       </Routes>
 
     </div>
+
+
   );
 }
 

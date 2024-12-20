@@ -7,22 +7,36 @@ import { useState } from "react";
 
 
 function Signin() {
-    const navigate = useNavigate ()
+    const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
-    const [ email, setEmail] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState("")
-
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setEmailError('')
+        setPasswordError('')
+        
+        if (!email) {
+            setEmailError('Please enter an email address')
+            setIsLoading(false)
+            return
+        }
+        if (!password) {
+            setPasswordError('Please enter a password')
+            setIsLoading(false)
+            return
+        }
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({email: email, password: password})
+                body: JSON.stringify({ email: email, password: password })
             });
             const data = await response.json();
             console.log(data)
@@ -38,10 +52,10 @@ function Signin() {
                 navigate('/user', {
                     replace: true,
                 });
-               
-            }else{
+
+            } else {
                 throw new Error("Erreur lors de la connexion");
-            }  
+            }
 
         } catch (error) {
             console.error("Erreur d'inscription: ", error);
@@ -58,11 +72,13 @@ function Signin() {
                     <form onSubmit={handleSubmit}>
                         <div className="input-wrapper">
                             <label className="email">Email</label>
-                            <input type="text" id="email"  onChange={(e) => setEmail(e.target.value)} />
+                            <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} />
+                            {emailError && <p className='error-message'> {emailError} </p>}
                         </div>
                         <div className="input-wrapper">
                             <label for="password">Password</label>
-                            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+                            {passwordError && <p className='error-message'> {passwordError} </p>}
                         </div>
                         <div className="input-remember">
                             <input type="checkbox" id="remember-me" />
@@ -70,7 +86,7 @@ function Signin() {
 
                         </div>
                         <button className='sign-in-button'> Sing in</button>
-                       
+                        {error && <p className="error-message">{error}</p>}
                     </form>
                 </section>
             </main>

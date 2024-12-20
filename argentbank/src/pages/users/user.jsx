@@ -7,6 +7,7 @@ function User() {
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
   const [isEditing, setIsEditing] = useState(false);
+  
   const [editForm, setEditForm] = useState({
     username: '',
     firstName: '',
@@ -124,7 +125,7 @@ function User() {
               </div>
             </form>
           ) : (
-            `${userData.firstName} ${userData.lastName}!`
+           <h2 className="welcome-user-name">{userData.firstName} {userData.lastName}!</h2> 
           )}
 
           {!isEditing && (

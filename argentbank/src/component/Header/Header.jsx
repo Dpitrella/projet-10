@@ -1,10 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-function Header({ isLoggedIn, userName }) {
+function Header() {
+  const user = useSelector(state => state.user);
+  const location = useLocation();
+  const isUserPage = location.pathname === '/user';
+  const isLoggedIn = !!user.email;
+
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -15,14 +21,14 @@ function Header({ isLoggedIn, userName }) {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div>
-        {isLoggedIn ? (
+      <div className='log-out'>
+        {isUserPage && isLoggedIn ? (
           <>
-            <Link className="main-nav-item" to="/profile">
+            <div className="main-nav-item" >
               <FontAwesomeIcon icon={faUserCircle} />
-              {userName}
-            </Link>
-            <Link className="main-nav-item" to="/logout">
+              {user.userName || `${user.firstName} ${user.lastName}`}
+            </div>
+            <Link className="main-nav-item" to="/">
               <FontAwesomeIcon icon={faSignOutAlt} />
               Sign Out
             </Link>

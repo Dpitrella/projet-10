@@ -7,6 +7,7 @@ h1 {
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
+    margin-bottom: 5px;
 }
 
 .header {
@@ -105,6 +106,10 @@ h1 {
   }
   .inpt-form input {
     height: 25px;
+  }
+  .welcome-user-name {
+    margin: 0%;
+    font-size: 30px;
   }
   @media (min-width: 720px) {
     .account {

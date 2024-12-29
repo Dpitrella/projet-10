@@ -63,7 +63,7 @@ function User() {
     dispatch(setLastName(editForm.lastName));
     dispatch(setUserName(editForm.username));
     setIsEditing(false);
-    // Aquí deberías implementar la lógica para guardar en el backend
+    
   };
 
   const handleCancelEdit = () => {

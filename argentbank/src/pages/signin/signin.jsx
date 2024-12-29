@@ -76,13 +76,13 @@ function Signin() {
                             {emailError && <p className='error-message'> {emailError} </p>}
                         </div>
                         <div className="input-wrapper">
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} />
                             {passwordError && <p className='error-message'> {passwordError} </p>}
                         </div>
                         <div className="input-remember">
                             <input type="checkbox" id="remember-me" />
-                            <label for="remember-me">Remember me </label>
+                            <label htmlFor="remember-me">Remember me </label>
 
                         </div>
                         <button className='sign-in-button'> Sing in</button>

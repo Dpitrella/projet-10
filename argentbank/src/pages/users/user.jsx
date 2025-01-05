@@ -34,7 +34,7 @@ function User() {
       });
 
       if (!response.ok) {
-        throw new Error('Error al obtener datos del usuario');
+        throw new Error('Error fetching user data');
       }
 
       const data = await response.json();

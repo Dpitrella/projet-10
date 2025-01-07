@@ -4,7 +4,9 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './signin.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { setUser } from '../../redux/userSlice';
+import { useDispatch } from 'react-redux';
+import { login } from '../../services/api';
 
 function Signin() {
     const navigate = useNavigate()
@@ -14,12 +16,13 @@ function Signin() {
     const [error, setError] = useState("")
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const dispatch = useDispatch();
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setEmailError('')
-        setPasswordError('')
-        
+
         if (!email) {
             setEmailError('Please enter an email address')
             setIsLoading(false)
@@ -31,33 +34,12 @@ function Signin() {
             return
         }
         try {
-            const response = await fetch('http://localhost:3001/api/v1/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email, password: password })
-            });
-            const data = await response.json();
-            console.log(data)
-            if (!response.ok) {
-                if (data.error) {
-                    return setError(data.error)
-                }
-                throw new Error("Erreur lors de la connexion");
-            }
-
-            if (data.body.token) {
-                localStorage.setItem('token', data.body.token);
-                navigate('/user', {
-                    replace: true,
-                });
-
-            } else {
-                throw new Error("Erreur lors de la connexion");
-            }
-
-        } catch (error) {
+            const response = await login({ email, password });
+            dispatch(setUser(response.body));
+            localStorage.setItem ('token', response.body.token)
+            navigate('/user');
+        }
+        catch (error) {
             console.error("Erreur d'inscription: ", error);
         } finally {
             setIsLoading(false);

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser, setFirstName, setLastName, setUserName } from '../../redux/userSlice';
 import './user.css';
+import { useNavigate } from "react-router-dom";
 
 function User() {
+  const  navigate = useNavigate()
   const dispatch = useDispatch();
   const userData = useSelector(state => state.user);
   const [isEditing, setIsEditing] = useState(false);
@@ -20,8 +22,10 @@ function User() {
 
   const fetchUserData = async () => {
     const token = localStorage.getItem('token');
+
     if (!token) {
-      return;
+      navigate ('/signin')
+      return
     }
 
     try {
@@ -38,12 +42,14 @@ function User() {
       }
 
       const data = await response.json();
+      console.log (data)
       dispatch(setUser({
         email: data.body.email,
         firstName: data.body.firstName,
         lastName: data.body.lastName,
         userName: data.body.userName
       }));
+      console.log (userData)
     } catch (error) {
       console.error("Error fetching user data:", error);
     }

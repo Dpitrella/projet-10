@@ -16,6 +16,7 @@ function Home() {
             </div>
             <section className="features">
                 <h2 className="sr-only">Features</h2>
+                
                 <div className="feature-item">
                     <img src="/images/logo/icon-chat.webp" alt="Chat Icon" className="feature-icon" />
                     <h3 className="feature-item-title">You are our #1 priority</h3>

@@ -30,7 +30,11 @@
 .main-nav a.router-link-exact-active {
   color: #42b983;
 }
-
+button {
+  background-color: white;
+  border-color: white;
+  
+}
 .main-nav-item {
   font-weight: bold;
   display: flex;

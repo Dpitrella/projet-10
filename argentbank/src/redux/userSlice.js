@@ -30,7 +30,10 @@ const userSlice = createSlice({
         state.userName= action.payload
     },
     clearUser: (state) => {
-      state.user = null; // Réinitialise les informations utilisateur
+      state.email = ""
+      state.firstName = ""
+      state.lastName = ""
+      state.userName = ""
     },
   },
 });
